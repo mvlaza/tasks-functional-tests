@@ -13,7 +13,7 @@ public class TasksTest {
 
 	private WebDriver acessaAplicacao() {
 		FirefoxOptions ffopt = new FirefoxOptions() ;
-		ffopt.setHeadless(true);
+		ffopt.addArguments("-headless");
 		WebDriver driver = new FirefoxDriver(ffopt);
 		driver.navigate().to("http://localhost:8001/tasks/");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
