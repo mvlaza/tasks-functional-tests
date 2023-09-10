@@ -7,11 +7,14 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 
 public class TasksTest {
 
 	private WebDriver acessaAplicacao() {
-		WebDriver driver = new FirefoxDriver();
+		FirefoxOptions ffopt = new FirefoxOptions() ;
+		ffopt.setHeadless(true);
+		WebDriver driver = new FirefoxDriver(ffopt);
 		driver.navigate().to("http://localhost:8001/tasks/");
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 		return driver;
