@@ -1,5 +1,7 @@
 package br.ce.wcaquino.tasks.functional;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.concurrent.TimeUnit;
 
 import org.junit.Assert;
@@ -8,6 +10,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
+import org.openqa.selenium.remote.RemoteWebDriver;
 
 public class TasksTest {
 
@@ -15,8 +18,14 @@ public class TasksTest {
 		FirefoxOptions ffopt = new FirefoxOptions() ;
 		ffopt.addArguments("-headless");
 		WebDriver driver = new FirefoxDriver(ffopt);
-		driver.navigate().to("http://localhost:8001/tasks/");
-		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		try {
+			driver = new RemoteWebDriver(new URL("http://localhost:4444"), ffopt);
+			driver.navigate().to("http://localhost:8001/tasks/");
+			driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return driver;
 	}
 
